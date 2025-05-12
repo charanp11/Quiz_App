@@ -23,7 +23,7 @@ Live URL: [Add your deployed link here]
 
 ## Local Setup
 ```bash
-git clone https://github.com/your-username/quiz-app.git
+git clone https://github.com/charanp11/Quiz_App
 cd quiz-app
 npm install
 npm run dev
