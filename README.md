@@ -19,7 +19,7 @@ This is a responsive and interactive **Quiz App** built using **Next.js**, **Mat
 - **better-react-mathjax** - Render LaTeX Math expressions
 
 ## Deployment
-Live URL: [https://mathsprint-xi.vercel.app/] (https://mathsprint-xi.vercel.app)
+Live URL: [https://mathsprint-xi.vercel.app]
 
 ## Local Setup
 ```bash
