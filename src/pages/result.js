@@ -49,7 +49,7 @@ export default function Result() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container maxWidth="lg" style={{ marginTop: '40px', marginBottom: '40px' }}>
         <Typography variant="h4" align="center" gutterBottom>
           Quiz Results
         </Typography>
@@ -68,27 +68,70 @@ export default function Result() {
 
         <Stack spacing={2} style={{ marginTop: '30px' }}>
           {questions.map((q, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }}>
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ delay: idx * 0.1 }}
+            >
               <Card style={{ padding: '16px', boxShadow: '0px 2px 8px rgba(0,0,0,0.1)' }}>
                 <CardContent>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600, lineHeight: 1.6, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                    <span style={{ marginRight: '8px' }}>Q{idx + 1}:</span>
-                    <MathJax dynamic inline={false}>
-                      {q.Question}
-                    </MathJax>
-                  </Typography>
+
+                  {/* ⭐ Scrollable Question */}
+                  <div style={{
+                    overflowX: 'auto',
+                    maxWidth: '100%',
+                    WebkitOverflowScrolling: 'touch',
+                  }}>
+                    <Typography 
+                      variant="subtitle1" 
+                      style={{ 
+                        fontWeight: 600, 
+                        lineHeight: 1.6, 
+                        display: 'inline-flex', 
+                        alignItems: 'center',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      <span style={{ marginRight: '8px' }}>Q{idx + 1}:</span>
+                      <MathJax dynamic inline={false}>
+                        {q.Question}
+                      </MathJax>
+                    </Typography>
+                  </div>
 
                   <Typography variant="body2" style={{ marginTop: '6px' }}>
                     Difficulty: {q['Difficulty Level']}
                   </Typography>
 
-                  <Typography variant="body2" style={{ marginTop: '10px' }}>
-                    Your Answer: <strong>{formatAnswer(selectedAnswers[idx], q)}</strong>
-                  </Typography>
+                  {/* ⭐ Scrollable Your Answer */}
+                  <div style={{
+                    overflowX: 'auto',
+                    maxWidth: '100%',
+                    WebkitOverflowScrolling: 'touch',
+                  }}>
+                    <Typography 
+                      variant="body2" 
+                      style={{ marginTop: '10px', whiteSpace: 'nowrap' }}
+                    >
+                      Your Answer: <strong>{formatAnswer(selectedAnswers[idx], q)}</strong>
+                    </Typography>
+                  </div>
 
-                  <Typography variant="body2" style={{ marginTop: '5px' }}>
-                    Correct Answer: <strong>{formatAnswer(q['Correct Option'], q)}</strong>
-                  </Typography>
+                  {/* ⭐ Scrollable Correct Answer */}
+                  <div style={{
+                    overflowX: 'auto',
+                    maxWidth: '100%',
+                    WebkitOverflowScrolling: 'touch',
+                  }}>
+                    <Typography 
+                      variant="body2" 
+                      style={{ marginTop: '5px', whiteSpace: 'nowrap' }}
+                    >
+                      Correct Answer: <strong>{formatAnswer(q['Correct Option'], q)}</strong>
+                    </Typography>
+                  </div>
+
                 </CardContent>
               </Card>
             </motion.div>

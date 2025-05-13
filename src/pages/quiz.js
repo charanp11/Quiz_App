@@ -91,8 +91,16 @@ export default function Quiz() {
   };
 
   return (
-    <Container maxWidth="md" style={{ marginTop: '40px' }}>
-      <Typography variant="h5" color="error" gutterBottom>
+    <Container maxWidth="md" style={{ marginTop: '80px', marginBottom: '40px' }}>
+      
+      {/* ⭐ Centered Timer */}
+      <Typography 
+        variant="h5" 
+        color="error" 
+        gutterBottom 
+        align="center" 
+        style={{ padding: '10px 0' }}
+      >
         Time Left: {formatTime(timer)}
       </Typography>
 
@@ -105,30 +113,36 @@ export default function Quiz() {
       >
         <Card style={{ marginBottom: '20px', padding: '20px', boxShadow: '0px 2px 8px rgba(0,0,0,0.1)' }}>
           <CardContent>
-            <Typography
-              variant="h6"
-              style={{
-                fontWeight: 600,
-                fontSize: '1rem',
-                lineHeight: 1.5,
-                marginBottom: '20px',
-                overflowWrap: 'break-word',
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word',
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center'
-              }}
-            >
-              <span style={{ marginRight: '8px' }}>
-                Q{currentQuestionIndex + 1}:
-              </span>
-              <MathJax dynamic inline={false}>
-                {currentQuestion.Question}
-              </MathJax>
-            </Typography>
 
-            <Stack spacing={1.5}>
+            {/* ⭐ Horizontal Scroll Wrapper for Question */}
+            <div style={{
+              overflowX: 'auto',
+              maxWidth: '100%',
+              WebkitOverflowScrolling: 'touch',
+            }}>
+              <Typography
+                variant="h6"
+                style={{
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  lineHeight: 1.5,
+                  marginBottom: '20px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span style={{ marginRight: '8px' }}>
+                  Q{currentQuestionIndex + 1}:
+                </span>
+                <MathJax dynamic inline={false}>
+                  {currentQuestion.Question}
+                </MathJax>
+              </Typography>
+            </div>
+
+            {/* ⭐ Option Buttons */}
+            <Stack spacing={2}>
               <AnimatePresence>
                 {[1, 2, 3, 4].map((opt, index) => (
                   <motion.div
@@ -137,13 +151,21 @@ export default function Quiz() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ delay: index * 0.1, duration: 0.2 }}
-                    whileTap={{ scale: 0.70 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Button
                       variant={selectedAnswers[currentQuestionIndex] === opt ? 'contained' : 'outlined'}
                       fullWidth
                       onClick={() => handleSelectAnswer(opt)}
-                      style={{ textTransform: 'none', whiteSpace: 'normal', wordBreak: 'break-word' }}
+                      style={{
+                        textTransform: 'none',
+                        whiteSpace: 'normal',
+                        wordBreak: 'break-word',
+                        padding: '14px 18px',
+                        fontSize: '1.1rem',
+                        fontWeight: '500',
+                        borderRadius: '10px',
+                      }}
                     >
                       <MathJax dynamic inline={true}>
                         {currentQuestion[`Option ${opt}`]}
@@ -153,10 +175,12 @@ export default function Quiz() {
                 ))}
               </AnimatePresence>
             </Stack>
+
           </CardContent>
         </Card>
       </motion.div>
 
+      {/* ⭐ Navigation Buttons */}
       <Stack direction="row" spacing={2} justifyContent="space-between" style={{ marginTop: '20px' }}>
         <motion.div whileTap={{ scale: 0.75 }}>
           <Button variant="outlined" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
@@ -165,11 +189,13 @@ export default function Quiz() {
         </motion.div>
 
         {currentQuestionIndex === questions.length - 1 ? (
-          <motion.div whileTap={{ scale: 0.75 }}>
-            <Button variant="contained" color="success" onClick={handleSubmit}>
-              Submit
-            </Button>
-          </motion.div>
+          <Stack direction="row" justifyContent="center" style={{ width: '100%' }}>
+            <motion.div whileTap={{ scale: 0.75 }}>
+              <Button variant="contained" color="success" onClick={handleSubmit}>
+                Submit
+              </Button>
+            </motion.div>
+          </Stack>
         ) : (
           <motion.div whileTap={{ scale: 0.75 }}>
             <Button variant="contained" onClick={handleNext}>

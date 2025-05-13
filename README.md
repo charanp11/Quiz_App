@@ -19,11 +19,16 @@ This is a responsive and interactive **Quiz App** built using **Next.js**, **Mat
 - **better-react-mathjax** - Render LaTeX Math expressions
 
 ## Deployment
-Live URL: [Add your deployed link here]
+Live URL: [https://mathsprint-xi.vercel.app]
 
 ## Local Setup
 ```bash
-git clone https://github.com/your-username/quiz-app.git
+git clone https://github.com/charanp11/Quiz_App
 cd quiz-app
 npm install
 npm run dev
+
+## License
+This project is for educational and portfolio use.
+
+Feel free to try it out and test your math skills! 🎯
