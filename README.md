@@ -32,3 +32,4 @@ npm run dev
 This project is for educational and portfolio use.
 
 Feel free to try it out and test your math skills! 🎯
+
